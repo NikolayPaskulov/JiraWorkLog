@@ -96,6 +96,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DelegateCommand.cs" />
+    <Compile Include="Extensions\SelectionChangedBehaviour.cs" />
     <Compile Include="Models\NameValueModel.cs" />
     <Compile Include="ViewModels\Base\IPresentationViewModel.cs" />
     <Compile Include="ViewModels\Base\IViewModel.cs" />
