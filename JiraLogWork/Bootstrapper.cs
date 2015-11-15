@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SimpleInjector;
 using JiraLogWork.ViewModels;
 using JiraLogWork.Views;
+using System.Threading;
 
 namespace JiraLogWork
 {

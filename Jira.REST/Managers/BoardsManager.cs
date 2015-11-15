@@ -23,11 +23,11 @@ namespace Jira.REST.Managers
 		{
 			var boards = new List<Board>();
 
-			var http = _client.GetAsync(url).Result;
+            var http = _client.GetAsync(url).Result;
 
 			if (http.IsSuccessStatusCode)
 			{
-				var resultAsString = http.Content.ReadAsStringAsync().Result;
+                var resultAsString = http.Content.ReadAsStringAsync().Result;
 				var result = JsonConvert.DeserializeObject<GetAllBoardsResponse>(resultAsString);
 
 				return result.Values;
@@ -36,13 +36,13 @@ namespace Jira.REST.Managers
 			return boards;
 		}
 
-		public Board GetBoardById(string url)
+		public  Board GetBoardById(string url)
 		{
-			var http = _client.GetAsync(url).Result;
+            var http = _client.GetAsync(url).Result;
 
 			if (http.IsSuccessStatusCode)
 			{
-				var resultAsString = http.Content.ReadAsStringAsync().Result;
+                var resultAsString = http.Content.ReadAsStringAsync().Result;
 				var result = JsonConvert.DeserializeObject<Board>(resultAsString);
 
 				return result;
@@ -55,11 +55,11 @@ namespace Jira.REST.Managers
 		{
 			var sprints = new List<Sprint>();
 
-			var http = _client.GetAsync(url).Result;
+            var http = _client.GetAsync(url).Result;
 
 			if (http.IsSuccessStatusCode)
 			{
-				var resultAsString = http.Content.ReadAsStringAsync().Result;
+                var resultAsString = http.Content.ReadAsStringAsync().Result;
 				var result = JsonConvert.DeserializeObject<GetBoardSprintsResponse>(resultAsString);
 
 				return result.Values;
@@ -72,11 +72,11 @@ namespace Jira.REST.Managers
 		{
 			var issues = new List<Issue>();
 
-			var http = _client.GetAsync(url).Result;
+            var http = _client.GetAsync(url).Result;
 
 			if (http.IsSuccessStatusCode)
 			{
-				var resultAsString = http.Content.ReadAsStringAsync().Result;
+                var resultAsString = http.Content.ReadAsStringAsync().Result;
 				var result = JsonConvert.DeserializeObject<GetIssuesByBoardAndSprintResponse>(resultAsString);
 
 				return result.Issues;

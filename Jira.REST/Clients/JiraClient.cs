@@ -21,7 +21,7 @@ namespace Jira.REST.Clients
 
 
 		private HttpClient Client { get; set; }
-		private ConnectionManager ConnectionManager { get; set; } = new ConnectionManager();
+		private ConnectionManager ConnectionManager { get; set; }
 		private BoardsManager BoardsManager { get; set; }
 		private WorkLogManager WorkLogManager { get; set; }
 
@@ -33,6 +33,7 @@ namespace Jira.REST.Clients
 		public JiraClient(string baseUrl)
 		{
 			_baseUrl = baseUrl;
+            ConnectionManager = new ConnectionManager();
         }
 
 		public bool Connect(string username, string password)
@@ -98,7 +99,7 @@ namespace Jira.REST.Clients
 
 		public IEnumerable<Issue> GetIssuesByBoardAndSprint(string boardId, string sprintId)
 		{
-			var url = string.Format("{0}/{1}/{2}/{3}/{4}/{5}", _baseUrl, _jiraAgileUrl, "board", boardId, "sprint", sprintId);
+			var url = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}", _baseUrl, _jiraAgileUrl, "board", boardId, "sprint", sprintId, "issue");
 
 			return BoardsManager.GetIssuesByBoardAndSprint(url);
 		}
