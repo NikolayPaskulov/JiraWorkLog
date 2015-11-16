@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JiraLogWork.Views;
 using JiraLogWork.Models;
-using System.Timers;
+using System.Windows.Threading;
 
 namespace JiraLogWork.ViewModels
 {
@@ -20,8 +20,9 @@ namespace JiraLogWork.ViewModels
 		private string _selectedBoard;
         private string _selectedSprint;
         private string _selectedIssue;
-        private Timer _timer = new Timer();
-        private string _timeElapsed;
+		private DispatcherTimer _timer = new DispatcherTimer();
+		private int secondsElapsed = 0;
+        private string _timeElapsed = "00:00:00";
 
 		public ProjectViewModel(IProjectView view, IEnumerable<IPresentationViewModel> presentationViewModels, Jira.REST.Jira jira)
 		{
@@ -32,7 +33,6 @@ namespace JiraLogWork.ViewModels
 			_jira = jira;
                 
 			InitCommands();
-
 		}
 
         public string Name { get; set; }
@@ -61,6 +61,9 @@ namespace JiraLogWork.ViewModels
                               });
             });
 
+			_timer.Tick += _timer_Tick;
+			_timer.Interval = new TimeSpan(0, 0, 1);
+
             Start_Timer = new DelegateCommand(_ =>
             {
                 _timer.Start();
@@ -71,15 +74,22 @@ namespace JiraLogWork.ViewModels
                 _timer.Stop();
             });
 
-            Reset_Timer = new DelegateCommand(_ =>
+			Reset_Timer = new DelegateCommand(_ =>
             {
-                _timer.Stop();
-            });
+				secondsElapsed = 0;
+				TimeElapsed = new TimeSpan(0, 0, 0, secondsElapsed).ToString();
+			});
 		}
 
-        // Boards
+		private void _timer_Tick(object sender, EventArgs e)
+		{
+			secondsElapsed++;
+			TimeElapsed = new TimeSpan(0, 0, 0, secondsElapsed).ToString();
+        }
 
-        public string SelectedBoard
+		// Boards
+
+		public string SelectedBoard
         {
             get { return _selectedBoard; }
             set { this.SetField(ref this._selectedBoard, value, () => this.SelectedBoard); }
@@ -124,7 +134,6 @@ namespace JiraLogWork.ViewModels
         }
         public void ViewChanged()
         {
-            _timer.Elapsed += _timer_Elapsed;
             Boards = _jira.GetAllBoards().Select(x => new NameValueModel
             {
                 Name = x.Name,
@@ -133,10 +142,6 @@ namespace JiraLogWork.ViewModels
         }
 
         // Timer
-        void _timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            
-        }
 
         public string TimeElapsed 
         {
