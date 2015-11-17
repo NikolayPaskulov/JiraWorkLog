@@ -12,51 +12,78 @@ namespace Jira.REST
 	{
 		private IJiraClient Client { get; set; }
 
-		public bool Connect(string url, string name, string password)
+		public Task<bool> Connect(string url, string name, string password)
 		{
 			Client = new JiraClient(url);
 
-			return Client.Connect(name, password);
+			return Task.Factory.StartNew(() =>
+			{
+				return Client.Connect(name, password);
+			});
 		}
 
-		public IEnumerable<Board> GetAllBoards()
+		public Task<IEnumerable<Board>> GetAllBoards()
 		{
-			return Client.GetAllBoards();
+			return Task.Factory.StartNew(() =>
+			{
+				return Client.GetAllBoards();
+			}); 
 		}
 
-		public Board GetBoardById(string boardId)
+		public Task<Board> GetBoardById(string boardId)
 		{
-			return Client.GetBoardById(boardId);
+			return Task.Factory.StartNew(() =>
+			{
+				return Client.GetBoardById(boardId);
+			});
 		}
 
-		public IEnumerable<Sprint> GetBoardSprints(string boardId)
+		public Task<IEnumerable<Sprint>> GetBoardSprints(string boardId)
 		{
-			return Client.GetBoardSprints(boardId);
+			return Task.Factory.StartNew(() =>
+			{
+				return Client.GetBoardSprints(boardId);
+			});
 		}
 
-		public IEnumerable<Issue> GetIssuesByBoardAndSprint(string boardId, string sprintId)
+		public Task<IEnumerable<Issue>> GetIssuesByBoardAndSprint(string boardId, string sprintId)
 		{
-			return Client.GetIssuesByBoardAndSprint(boardId, sprintId);
+			return Task.Factory.StartNew(() =>
+			{
+				return Client.GetIssuesByBoardAndSprint(boardId, sprintId);
+			});
 		}
 
-		public IEnumerable<WorkLog> GetIssueWorkLogs(string issueIdOrKey)
+		public Task<IEnumerable<WorkLog>> GetIssueWorkLogs(string issueIdOrKey)
 		{
-			return Client.GetIssueWorkLogs(issueIdOrKey);
+			return Task.Factory.StartNew(() =>
+			{
+				return Client.GetIssueWorkLogs(issueIdOrKey);
+			});
 		}
 
-		public WorkLog GetWorkLogById(string issueIdOrKey, string workLogId)
+		public Task<WorkLog> GetWorkLogById(string issueIdOrKey, string workLogId)
 		{
-			return Client.GetWorkLogById(issueIdOrKey, workLogId);
+			return Task.Factory.StartNew(() =>
+			{
+				return Client.GetWorkLogById(issueIdOrKey, workLogId);
+			});
 		}
 
-		public WorkLog AddWorkLog(string issueIdOrKey, DateTime created, int timeSpent, string comment)
+		public Task<WorkLog> AddWorkLog(string issueIdOrKey, DateTime created, int timeSpent, string comment)
 		{
-			return Client.AddWorkLog(issueIdOrKey, created, timeSpent, comment);
+			return Task.Factory.StartNew(() =>
+			{
+				return Client.AddWorkLog(issueIdOrKey, created, timeSpent, comment);
+			});
 		}
 
-		public WorkLog UpdateWorkLog(string issueIdOrKey, string workLogId, DateTime created, int timeSpent, string comment)
+		public Task<WorkLog> UpdateWorkLog(string issueIdOrKey, string workLogId, DateTime created, int timeSpent, string comment)
 		{
-			return Client.UpdateWorkLog(issueIdOrKey, workLogId, created, timeSpent, comment);
+			return Task.Factory.StartNew(() =>
+			{
+				return Client.UpdateWorkLog(issueIdOrKey, workLogId, created, timeSpent, comment);
+			});
 		}
 	}
 }

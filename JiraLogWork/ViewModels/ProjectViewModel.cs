@@ -41,20 +41,22 @@ namespace JiraLogWork.ViewModels
 
 		private void InitCommands()
 		{
-			Boards_Changed = new DelegateCommand(_ =>
+			Boards_Changed = new DelegateCommand(async _ =>
 			{
-				Sprints = _jira.GetBoardSprints(SelectedBoard.ToString())
-				.Where(x => x.State == "active")
-				.Select(x => new NameValueModel {
-					Name = x.Name,
-					Value = x.Id.ToString()
-				});
+				var getSprints = await _jira.GetBoardSprints(SelectedBoard.ToString());
+
+				Sprints = getSprints.Where(x => x.State == "active")
+									.Select(x => new NameValueModel {
+										Name = x.Name,
+										Value = x.Id.ToString()
+									});
             });
 
-            Sprints_Changed = new DelegateCommand(_ =>
+            Sprints_Changed = new DelegateCommand(async _ =>
             {
-                Issues = _jira.GetIssuesByBoardAndSprint(SelectedBoard.ToString(), SelectedSprint.ToString())
-                              .Select(x => new NameValueModel
+				var issues = await _jira.GetIssuesByBoardAndSprint(SelectedBoard.ToString(), SelectedSprint.ToString());
+
+                Issues = issues.Select(x => new NameValueModel
                               {
                                   Name = x.Key,
                                   Value = x.Key
@@ -132,13 +134,15 @@ namespace JiraLogWork.ViewModels
             get { return _issues; }
             set { this.SetField(ref this._issues, value, () => this.Issues); }
         }
-        public void ViewChanged()
+        public async void ViewChanged()
         {
-            Boards = _jira.GetAllBoards().Select(x => new NameValueModel
-            {
-                Name = x.Name,
-                Value = x.Id.ToString()
-            });
+			var boards = await _jira.GetAllBoards();
+
+            Boards = boards.Select(x => new NameValueModel
+							{
+							    Name = x.Name,
+							    Value = x.Id.ToString()
+							});
         }
 
         // Timer

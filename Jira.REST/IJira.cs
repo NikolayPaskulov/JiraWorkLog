@@ -9,22 +9,22 @@ namespace Jira.REST
 {
 	public interface IJira
 	{
-		bool Connect(string url, string name, string password);
+		Task<bool> Connect(string url, string name, string password);
 
-		IEnumerable<Board> GetAllBoards();
+		Task<IEnumerable<Board>> GetAllBoards();
 
-		Board GetBoardById(string boardId);
+		Task<Board> GetBoardById(string boardId);
 
-		IEnumerable<Sprint> GetBoardSprints(string boardId);
+		Task<IEnumerable<Sprint>> GetBoardSprints(string boardId);
 
-		IEnumerable<Issue> GetIssuesByBoardAndSprint(string boardId, string sprintId);
+		Task<IEnumerable<Issue>> GetIssuesByBoardAndSprint(string boardId, string sprintId);
 
-		IEnumerable<WorkLog> GetIssueWorkLogs(string issueIdOrKey);
+		Task<IEnumerable<WorkLog>> GetIssueWorkLogs(string issueIdOrKey);
 
-		WorkLog GetWorkLogById(string issueIdOrKey, string workLogId);
+		Task<WorkLog> GetWorkLogById(string issueIdOrKey, string workLogId);
 
-		WorkLog AddWorkLog(string issueIdOrKey, DateTime created, int timeSpent, string comment);
+		Task<WorkLog> AddWorkLog(string issueIdOrKey, DateTime created, int timeSpent, string comment);
 
-		WorkLog UpdateWorkLog(string issueIdOrKey, string workLogId, DateTime created, int timeSpent, string comment);
+		Task<WorkLog> UpdateWorkLog(string issueIdOrKey, string workLogId, DateTime created, int timeSpent, string comment);
 	}
 }

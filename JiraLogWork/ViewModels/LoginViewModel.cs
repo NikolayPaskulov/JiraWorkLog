@@ -32,11 +32,11 @@ namespace JiraLogWork.ViewModels
 
 		private void AddCommandsHandlers()
 		{
-			Logic_Click = new DelegateCommand(box =>
+			Logic_Click = new DelegateCommand(async box =>
 			{
 				try
 				{
-					var connection = _jira.Connect(JiraUrl, Username, (box as PasswordBox).Password);
+					var connection = await _jira.Connect(JiraUrl, Username, (box as PasswordBox).Password);
 					if(connection)
 					{
 						var view = _presentationViewModels.FirstOrDefault(x => x.Page == Pages.Project);
