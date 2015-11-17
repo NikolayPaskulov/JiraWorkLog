@@ -200,10 +200,6 @@
       <Project>{cc709add-c412-4510-939e-dabc5e1c13a8}</Project>
       <Name>Jira.REST</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\npaskul\Downloads\Release V2\Release V2\AvalonControlsLibrary\AvalonControlsLibrary\AvalonControlsLibrary.csproj">
-      <Project>{f2e7b3f0-e03e-4341-984f-2962aca8c07e}</Project>
-      <Name>AvalonControlsLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\PlayButton_Hover.png" />
