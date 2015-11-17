@@ -7,11 +7,13 @@
              xmlns:cb="clr-namespace:JiraLogWork.Extensions"
              xmlns:local="clr-namespace:JiraLogWork.Views"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:Controls="http://schemas.AvalonControls/AvalonControlsLibrary/Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Border BorderBrush="Blue" BorderThickness="0.5">
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
@@ -79,13 +81,18 @@
                         <ComboBox Grid.Row="1" 
                               ItemsSource="{ Binding Issues}"
                               DisplayMemberPath="Name"
-                              SelectedValuePath="Value"
+                              SelectedValuePath="Name"
                               SelectedValue="{Binding SelectedIssue }"
                               Margin="30 0">
                         </ComboBox>
                     </Grid>
                 </Border>
             </Grid>
+            <!--<Grid Grid.Row="1">
+                <TabControl>
+                    
+                </TabControl>
+            </Grid>-->
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -188,17 +195,20 @@
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
 
                         <Label HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0">Date</Label>
-                        <DatePicker Grid.Row="1" Grid.Column="0" SelectedDate="{x:Static sys:DateTime.Now}" Width="Auto"></DatePicker>
+                        <DatePicker Grid.Row="1" Grid.Column="0" SelectedDate="{ Binding SelectedDate }" Width="Auto"></DatePicker>
 
                         <Label HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1">Time</Label>
-                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TimeElapsed}" Width="Auto" Margin="20 0 0 0"></TextBox>
+                        <!--<Controls:TimePicker Grid.Row="1" Grid.Column="1" SelectedTime="{Binding TimeElapsed }"></Controls:TimePicker>-->
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TimeElapsed}" Margin="10 0 0 0"></TextBox>
+                        
                         <Label HorizontalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Margin="0 10 0 0">Message</Label>
-                        <TextBox Grid.Row="3" Grid.ColumnSpan="2"></TextBox>
+                        <TextBox Grid.Row="3" Grid.ColumnSpan="2" Text="{ Binding Message }"></TextBox>
 
-                        <Button Grid.Row="4" Grid.Column="1" Content="Log Work" Width="Auto" Margin="0 10 0 0"></Button>
+                        <Button Grid.Row="4" Grid.Column="1" Content="Log Work" Width="Auto" Margin="0 10 0 0" Command="{ Binding LogWork}"></Button>
                     </Grid>
                 </Border>
             </Grid>

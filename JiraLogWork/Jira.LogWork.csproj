@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>JiraLogWork</RootNamespace>
     <AssemblyName>JiraLogWork</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -101,6 +101,7 @@
     <Compile Include="ViewModels\Base\IPresentationViewModel.cs" />
     <Compile Include="ViewModels\Base\IViewModel.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
+    <Compile Include="ViewModels\DropDownsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
@@ -172,7 +173,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contracts\" />
-    <Folder Include="Controls\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\WindowsIcons-license.txt" />
@@ -199,6 +199,10 @@
     <ProjectReference Include="..\Jira.REST\Jira.REST.csproj">
       <Project>{cc709add-c412-4510-939e-dabc5e1c13a8}</Project>
       <Name>Jira.REST</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\npaskul\Downloads\Release V2\Release V2\AvalonControlsLibrary\AvalonControlsLibrary\AvalonControlsLibrary.csproj">
+      <Project>{f2e7b3f0-e03e-4341-984f-2962aca8c07e}</Project>
+      <Name>AvalonControlsLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

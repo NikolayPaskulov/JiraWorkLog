@@ -26,7 +26,7 @@ namespace Jira.REST.Clients
 		private WorkLogManager WorkLogManager { get; set; }
 
 
-		private const string _jiraApiUrl = "rest/api/latest/";
+		private const string _jiraApiUrl = "rest/api/latest";
 		private const string _jiraAuthUrl = "rest/auth/1/session";
 		private const string _jiraAgileUrl = "rest/agile/latest";
 

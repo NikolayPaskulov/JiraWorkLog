@@ -57,7 +57,7 @@ namespace Jira.REST.Managers
 			var request = CreateRequestParams(new
 			{
 				created = created,
-				timeSpent = timeSpent,
+				timeSpentSeconds = timeSpent,
 				comment = comment
 			});
 
